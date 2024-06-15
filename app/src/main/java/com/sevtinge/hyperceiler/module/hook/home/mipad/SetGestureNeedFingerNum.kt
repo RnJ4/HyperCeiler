@@ -45,7 +45,7 @@ object SetGestureNeedFingerNum : BaseHook() {
                         if (motionEvent.device == null) true
                         else motionEvent.device.sources and 4098 == 4098
                     param.result =
-                        z && (swipeFlag in flagsSwipeLeftAndRight) && motionEvent.pointerCount == 4
+                        z && (swipeFlag in flagsSwipeLeftAndRight) && motionEvent.pointerCount == 10
                 }
             }
     }
