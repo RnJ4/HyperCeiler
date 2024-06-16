@@ -104,10 +104,13 @@ android {
             useLegacyPackaging = true
         }
         applicationVariants.all {
-            outputs.all {
-                outputFileName =
-                    "${apkId}_${versionName}_${versionCode}_${buildType.name}.apk"
-            }
+    val variant = this
+    variant.outputs
+        .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+        .forEach { output ->
+            val outputFileName = "hc-${variant.baseName}-${variant.versionName}-${variant.versionCode}.apk"
+            output.outputFileName = outputFileName
+        }
         }
     }
 
