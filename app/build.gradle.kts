@@ -14,7 +14,7 @@ plugins {
 
 
 val apkId = "HyperCeiler"
-val buildTypes = "release"
+val buildTypes = "debug"
 val roots = mapOf(
     "animation" to "libs/animation-${buildTypes}.aar",
     "appcompat" to "libs/appcompat-${buildTypes}.aar",
