@@ -12,14 +12,6 @@ plugins {
     // alias(libs.plugins.lspluginResopt)
 }
 
-lsparanoid {
-    seed = 227263
-    classFilter = { false }
-    includeDependencies = false
-    variantFilter = { variant ->
-        false
-    }
-}
 
 val apkId = "HyperCeiler"
 val buildTypes = "release"
@@ -131,24 +123,21 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
-            //proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro", "proguard-log.pro")
+
             versionNameSuffix = "_${DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())}"
             buildConfigField("String", "GIT_HASH", "\"$gitHash\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
             
         }
         create("beta") {
-            isMinifyEnabled = false
-            //proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
             versionNameSuffix = "_${DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())}"
             buildConfigField("String", "GIT_HASH", "\"${getGitHashLong()}\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
             
         }
         create("canary") {
-            isMinifyEnabled = false
-            //proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
             versionNameSuffix = "_${gitHash}_r${gitCode}"
             buildConfigField("String", "GIT_HASH", "\"${getGitHashLong()}\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
