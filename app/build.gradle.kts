@@ -129,26 +129,6 @@ android {
     val gitCode = getVersionCode()
     val gitHash = getGitHash()
 
-    signingConfigs {
-        create("hasProperties") {
-            if (properties != null) {
-                storeFile = file(getString("storeFile", "STORE_FILE", "Store file"))
-                storePassword = getString("storePassword", "STORE_PASSWORD", "Store password")
-                keyAlias = getString("keyAlias", "KEY_ALIAS", "Key alias")
-                keyPassword = getString("keyPassword", "KEY_PASSWORD", "Key password")
-            }
-            enableV1Signing = true
-            enableV2Signing = true
-            enableV3Signing = true
-            enableV4Signing = true
-        }
-        create("withoutProperties") {
-            enableV1Signing = true
-            enableV2Signing = true
-            enableV3Signing = true
-            enableV4Signing = true
-        }
-    }
 
     buildTypes {
         release {
@@ -157,11 +137,7 @@ android {
             versionNameSuffix = "_${DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())}"
             buildConfigField("String", "GIT_HASH", "\"$gitHash\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
-            if (properties != null) {
-                signingConfig = signingConfigs["hasProperties"]
-            } else {
-                signingConfig = signingConfigs["withoutProperties"]
-            }
+            
         }
         create("beta") {
             isMinifyEnabled = true
@@ -169,11 +145,7 @@ android {
             versionNameSuffix = "_${DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now())}"
             buildConfigField("String", "GIT_HASH", "\"${getGitHashLong()}\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
-            if (properties != null) {
-                signingConfig = signingConfigs["hasProperties"]
-            } else {
-                signingConfig = signingConfigs["withoutProperties"]
-            }
+            
         }
         create("canary") {
             isMinifyEnabled = true
@@ -181,19 +153,13 @@ android {
             versionNameSuffix = "_${gitHash}_r${gitCode}"
             buildConfigField("String", "GIT_HASH", "\"${getGitHashLong()}\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
-            if (properties != null) {
-                signingConfig = signingConfigs["hasProperties"]
-            } else {
-                signingConfig = signingConfigs["withoutProperties"]
-            }
+            
         }
         debug {
             versionNameSuffix = "_${gitHash}_r${gitCode}"
             buildConfigField("String", "GIT_HASH", "\"${getGitHashLong()}\"")
             buildConfigField("String", "GIT_CODE", "\"$gitCode\"")
-            if (properties != null) {
-                signingConfig = signingConfigs["hasProperties"]
-            }
+            
         }
     }
 
