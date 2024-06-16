@@ -105,7 +105,7 @@ android {
         }
         applicationVariants.all {
             outputs.all {
-                (this as BaseVariantOutputImpl).outputFileName =
+                outputFileName =
                     "${apkId}_${versionName}_${versionCode}_${buildType.name}.apk"
             }
         }
